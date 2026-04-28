@@ -35,6 +35,7 @@ export interface VertexAIMetadata {
   featureImportance: Record<string, number>;
   anomalyScore: number;
   embeddingDistance: number;
+  geminiModel?: string;
 }
 
 export interface ScanResult {
