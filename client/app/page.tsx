@@ -1,34 +1,32 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Landing Page — TrueScan hero, product codes, SDG callout, GCP architecture
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import Link from "next/link";
 import NavBar from "../components/ui/NavBar";
 import styles from "./page.module.css";
 
 const SAMPLE_CODES = [
-  { code: "TS-HUL-001-2024", name: "Dove Beauty Bar 100g",      brand: "HUL",    cat: "Personal Care"    },
-  { code: "TS-PEP-002-2024", name: "Lay's Classic Salted 52g",  brand: "PepsiCo",cat: "Snacks"            },
-  { code: "TS-MRK-003-2024", name: "Dettol Liquid Soap 200ml",  brand: "RB",     cat: "Health & Hygiene"  },
-  { code: "TS-COL-004-2024", name: "Colgate MaxFresh 150g",     brand: "Colgate",cat: "Oral Care"         },
-  { code: "TS-NES-005-2024", name: "Maggi 2-Minute Noodles 70g",brand: "Nestlé", cat: "Food & Nutrition"  },
+  { code: "TS-HUL-001-2024", name: "Dove Beauty Bar 100g", brand: "HUL", cat: "Personal Care" },
+  { code: "TS-PEP-002-2024", name: "Lay's Classic Salted 52g", brand: "PepsiCo", cat: "Snacks" },
+  { code: "TS-MRK-003-2024", name: "Dettol Liquid Soap 200ml", brand: "RB", cat: "Health & Hygiene" },
+  { code: "TS-COL-004-2024", name: "Colgate MaxFresh 150g", brand: "Colgate", cat: "Oral Care" },
+  { code: "TS-NES-005-2024", name: "Maggi 2-Minute Noodles 70g", brand: "Nestlé", cat: "Food & Nutrition" },
 ];
 
 const GCP_SERVICES = [
-  { name: "Gemini 2.0 Flash",    role: "Multimodal AI analysis of product images + codes",       tag: "AI" },
-  { name: "Vertex AI",           role: "MLOps pipeline hosting, model registry, explainability",  tag: "ML" },
-  { name: "BigQuery",            role: "Petabyte-scale analytics warehouse for scan events",       tag: "DATA" },
-  { name: "Cloud Run",           role: "Serverless container deployment for API server",           tag: "INFRA" },
-  { name: "Cloud Storage",       role: "Product image store and batch export",                     tag: "STORAGE" },
-  { name: "Firebase Firestore",  role: "Real-time scan event sync for SSE dashboard",             tag: "DB" },
+  { name: "Gemini 2.0 Flash", role: "Multimodal AI analysis of product images + codes", tag: "AI" },
+  { name: "Vertex AI", role: "MLOps pipeline hosting, model registry, explainability", tag: "ML" },
+  { name: "BigQuery", role: "Petabyte-scale analytics warehouse for scan events", tag: "DATA" },
+  { name: "Cloud Run", role: "Serverless container deployment for API server", tag: "INFRA" },
+  { name: "Cloud Storage", role: "Product image store and batch export", tag: "STORAGE" },
+  { name: "Firebase Firestore", role: "Real-time scan event sync for SSE dashboard", tag: "DB" },
 ];
 
 const SDG_GOALS = [
   { num: "03", label: "Good Health & Well-Being", detail: "Prevent counterfeit medicines & health products" },
-  { num: "12", label: "Responsible Consumption",  detail: "Authenticate FMCG supply chains at scale" },
-  { num: "17", label: "Partnerships for Goals",   detail: "Shared verification infrastructure for brands + regulators" },
+  { num: "12", label: "Responsible Consumption", detail: "Authenticate FMCG supply chains at scale" },
+  { num: "17", label: "Partnerships for Goals", detail: "Shared verification infrastructure for brands + regulators" },
 ];
 
 export default function LandingPage() {
@@ -50,8 +48,8 @@ export default function LandingPage() {
                 AUTHENTICITY
               </h1>
               <p className={styles.heroDesc}>
-                TrueScan uses Google Gemini 2.0 Flash multimodal AI to verify FMCG product 
-                authenticity across India&apos;s supply chain in real time — protecting consumers 
+                TrueScan uses Google Gemini 2.0 Flash multimodal AI to verify FMCG product
+                authenticity across India&apos;s supply chain in real time — protecting consumers
                 from counterfeit goods worth ₹1.1 lakh crore annually.
               </p>
               <div className={styles.heroCtas}>
@@ -74,12 +72,12 @@ export default function LandingPage() {
                 </div>
                 <div className={styles.terminalBody}>
                   {[
-                    ["MODEL",   "gemini-2.0-flash"],
+                    ["MODEL", "gemini-2.0-flash"],
                     ["BACKEND", "Cloud Run · asia-south1"],
-                    ["DB",      "BigQuery · supply_chain_analytics"],
-                    ["STREAM",  "SSE · /api/events"],
-                    ["STATUS",  "ALL SYSTEMS NOMINAL"],
-                    ["SDG",     "03, 12, 17 ADDRESSED"],
+                    ["DB", "BigQuery · supply_chain_analytics"],
+                    ["STREAM", "SSE · /api/events"],
+                    ["STATUS", "ALL SYSTEMS NOMINAL"],
+                    ["SDG", "03, 12, 17 ADDRESSED"],
                   ].map(([key, val]) => (
                     <div key={key} className={styles.terminalLine}>
                       <span className={styles.terminalKey}>{key}</span>

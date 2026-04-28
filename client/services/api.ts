@@ -1,7 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// API Service — typed fetch layer to Express backend
-// All calls go through Next.js /api/* rewrite → localhost:5000
-// ─────────────────────────────────────────────────────────────────────────────
 
 import type {
   ScanRequest,
@@ -12,7 +8,7 @@ import type {
   ApiError,
 } from "../types";
 
-const BASE = "/api";
+const BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 async function apiFetch<T>(
   path: string,
@@ -35,7 +31,6 @@ async function apiFetch<T>(
   return res.json() as Promise<T>;
 }
 
-// ── Endpoints ────────────────────────────────────────────────────────────────
 
 export async function scanProduct(req: ScanRequest): Promise<ScanResult> {
   return apiFetch<ScanResult>("/scan", {
@@ -52,7 +47,7 @@ export async function getProduct(code: string): Promise<ProductInfo> {
   return apiFetch<ProductInfo>(`/product/${encodeURIComponent(code)}`);
 }
 
-// ── SSE live feed subscription ───────────────────────────────────────────────
+
 export function subscribeLiveFeed(
   onEvent: (event: LiveScanEvent) => void,
   onError?: (err: Event) => void
@@ -64,7 +59,7 @@ export function subscribeLiveFeed(
       const data = JSON.parse(e.data as string) as LiveScanEvent;
       onEvent(data);
     } catch {
-      // ignore malformed events
+
     }
   });
 

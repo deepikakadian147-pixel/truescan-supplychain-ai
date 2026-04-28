@@ -1,8 +1,7 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Admin Dashboard — analytics, live feed, threat map, risk categories
-// ─────────────────────────────────────────────────────────────────────────────
+
+
 
 import { useEffect, useState } from "react";
 import NavBar from "../../../components/ui/NavBar";

@@ -1,10 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ResultCard — full scan result display
-// Shows: verdict, AI summary, confidence meter, supply chain, risk factors,
-//        Vertex AI metadata, blockchain hash
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import type { ScanResult } from "../../types";
 import StatusBadge from "../ui/StatusBadge";
@@ -16,11 +12,11 @@ interface ResultCardProps {
 }
 
 const STAGE_LABELS: Record<string, string> = {
-  MANUFACTURE:    "MANUFACTURE",
-  QUALITY_CHECK:  "QA CHECK",
-  DISTRIBUTION:   "DISTRIBUTION",
-  RETAIL:         "RETAIL",
-  SCAN:           "CONSUMER SCAN",
+  MANUFACTURE: "MANUFACTURE",
+  QUALITY_CHECK: "QA CHECK",
+  DISTRIBUTION: "DISTRIBUTION",
+  RETAIL: "RETAIL",
+  SCAN: "CONSUMER SCAN",
 };
 
 export default function ResultCard({ result }: ResultCardProps) {
@@ -29,8 +25,8 @@ export default function ResultCard({ result }: ResultCardProps) {
 
   const confidenceColor =
     result.status === "AUTHENTIC" ? "var(--col-green)"
-    : result.status === "SUSPICIOUS" ? "var(--col-amber)"
-    : "var(--col-red)";
+      : result.status === "SUSPICIOUS" ? "var(--col-amber)"
+        : "var(--col-red)";
 
   const terminalLines = [
     { prefix: "PRODUCT  ›", text: result.productName, color: "white" as const },
@@ -102,12 +98,11 @@ export default function ResultCard({ result }: ResultCardProps) {
           {result.riskFactors.map((rf) => (
             <div
               key={rf.code}
-              className={`${styles.riskItem} ${
-                rf.severity === "CRITICAL" ? styles.riskCritical
-                : rf.severity === "HIGH" ? styles.riskHigh
-                : rf.severity === "MEDIUM" ? styles.riskMedium
-                : styles.riskLow
-              }`}
+              className={`${styles.riskItem} ${rf.severity === "CRITICAL" ? styles.riskCritical
+                  : rf.severity === "HIGH" ? styles.riskHigh
+                    : rf.severity === "MEDIUM" ? styles.riskMedium
+                      : styles.riskLow
+                }`}
             >
               <span className={styles.riskCode}>{rf.code}</span>
               <span className={styles.riskDesc}>{rf.description}</span>

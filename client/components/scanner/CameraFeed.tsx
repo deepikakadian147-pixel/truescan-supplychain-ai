@@ -1,8 +1,5 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// CameraFeed — real getUserMedia camera with hidden canvas for frame capture
-// ─────────────────────────────────────────────────────────────────────────────
 
 import type { ScannerHookReturn } from "../../types";
 import styles from "./CameraFeed.module.css";

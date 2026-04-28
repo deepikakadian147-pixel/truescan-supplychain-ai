@@ -1,8 +1,5 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ThreatMap — SVG world map with proportional risk circles per country
-// ─────────────────────────────────────────────────────────────────────────────
 
 import type { CountryThreat } from "../../types";
 import styles from "./ThreatMap.module.css";
@@ -19,16 +16,16 @@ function project(lat: number, lng: number): [number, number] {
 }
 
 const RISK_COLOR: Record<CountryThreat["riskLevel"], string> = {
-  LOW:      "rgba(0, 255, 65, 0.7)",
-  MEDIUM:   "rgba(255, 204, 0, 0.7)",
-  HIGH:     "rgba(255, 107, 0, 0.7)",
+  LOW: "rgba(0, 255, 65, 0.7)",
+  MEDIUM: "rgba(255, 204, 0, 0.7)",
+  HIGH: "rgba(255, 107, 0, 0.7)",
   CRITICAL: "rgba(255, 26, 26, 0.85)",
 };
 
 const RISK_PULSE_COLOR: Record<CountryThreat["riskLevel"], string> = {
-  LOW:      "rgba(0, 255, 65, 0.2)",
-  MEDIUM:   "rgba(255, 204, 0, 0.2)",
-  HIGH:     "rgba(255, 107, 0, 0.2)",
+  LOW: "rgba(0, 255, 65, 0.2)",
+  MEDIUM: "rgba(255, 204, 0, 0.2)",
+  HIGH: "rgba(255, 107, 0, 0.2)",
   CRITICAL: "rgba(255, 26, 26, 0.2)",
 };
 

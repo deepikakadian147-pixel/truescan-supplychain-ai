@@ -1,9 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ScanOverlay — animated scanline, corner brackets, target reticle
-// Rendered on top of CameraFeed during active scanning
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import type { ScannerState } from "../../types";
 import styles from "./ScanOverlay.module.css";
@@ -46,17 +43,16 @@ export default function ScanOverlay({ state, decodedCode }: ScanOverlayProps) {
       {/* Status bar */}
       <div className={styles.statusBar}>
         <span
-          className={`${styles.statusDot} ${
-            isActive ? styles.dotActive : styles.dotIdle
-          }`}
+          className={`${styles.statusDot} ${isActive ? styles.dotActive : styles.dotIdle
+            }`}
         />
         <span className={styles.statusText}>
-          {state === "IDLE"        && "SCANNER IDLE"}
+          {state === "IDLE" && "SCANNER IDLE"}
           {state === "INITIALIZING" && "INITIALIZING CAMERA..."}
-          {state === "SCANNING"   && "SCANNING — POINT AT PRODUCT CODE"}
+          {state === "SCANNING" && "SCANNING — POINT AT PRODUCT CODE"}
           {state === "PROCESSING" && "GEMINI 2.0 FLASH ANALYZING..."}
-          {state === "RESULT"     && "ANALYSIS COMPLETE"}
-          {state === "ERROR"      && "CAMERA ERROR"}
+          {state === "RESULT" && "ANALYSIS COMPLETE"}
+          {state === "ERROR" && "CAMERA ERROR"}
         </span>
         <span className={styles.modelTag}>GEMINI-2.0-FLASH</span>
       </div>

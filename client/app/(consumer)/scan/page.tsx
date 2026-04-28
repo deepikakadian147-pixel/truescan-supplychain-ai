@@ -1,8 +1,5 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Scanner Page — real camera + ZXing + manual input + Gemini AI result
-// ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";

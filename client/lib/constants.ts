@@ -1,11 +1,8 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// TrueScan Product Database & Supply Chain Fixtures
-// Real FMCG brands, realistic product codes, geographic supply chains
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import type { ProductInfo, ChainEvent, GeoCoordinate } from "../types";
 
-// ── Known product registry (simulates a BigQuery product table) ─────────────
+
 export const PRODUCT_DB: Record<string, ProductInfo> = {
   "TS-HUL-001-2024": {
     code: "TS-HUL-001-2024",
@@ -89,7 +86,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   },
 };
 
-// ── Supply chain templates by category ──────────────────────────────────────
+
 const MANUFACTURE_NODES: Record<string, GeoCoordinate> = {
   "Personal Care": {
     lat: 20.2827,
@@ -200,7 +197,7 @@ export function buildSupplyChain(
   return events;
 }
 
-// ── Deterministic pseudo-hash (not cryptographic — UI only) ─────────────────
+
 function hashString(input: string): string {
   let hash = 0;
   for (let i = 0; i < input.length; i++) {
@@ -210,7 +207,7 @@ function hashString(input: string): string {
   return Math.abs(hash).toString(16).padStart(64, "a").slice(0, 64);
 }
 
-// ── Scan locations pool (realistic Indian cities) ────────────────────────────
+
 export const SCAN_LOCATIONS: GeoCoordinate[] = [
   { lat: 28.6139, lng: 77.209, country: "India", city: "New Delhi" },
   { lat: 19.076, lng: 72.8777, country: "India", city: "Mumbai" },

@@ -1,9 +1,5 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// useLiveFeed — Server-Sent Events live scan stream hook
-// Maintains a rolling buffer of the last N scan events
-// ─────────────────────────────────────────────────────────────────────────────
 
 import { useEffect, useRef, useState } from "react";
 import type { LiveScanEvent } from "../types";

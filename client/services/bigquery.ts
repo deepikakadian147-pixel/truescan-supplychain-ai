@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Simulated BigQuery Analytics Warehouse
-// 30-day time series, country threats, category breakdowns
-// Simulates a BigQuery slot job with realistic metadata
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import type { AnalyticsData, DailyStat, CountryThreat } from "../types";
 
@@ -14,7 +10,7 @@ function simulateLatency(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-// ── Deterministic daily stats (seeded so they don't change on re-render) ────
+
 function generateDailyStats(): DailyStat[] {
   const stats: DailyStat[] = [];
   const seeds = [
@@ -43,7 +39,7 @@ function generateDailyStats(): DailyStat[] {
   return stats;
 }
 
-// ── Country threat data ───────────────────────────────────────────────────────
+
 function generateCountryThreats(): CountryThreat[] {
   return [
     {
@@ -129,11 +125,11 @@ function generateCountryThreats(): CountryThreat[] {
   ];
 }
 
-// ── Public API ───────────────────────────────────────────────────────────────
+
 export async function getAnalytics(): Promise<AnalyticsData> {
   const startMs = Date.now();
 
-  // Simulate BigQuery slot allocation + query execution
+
   await simulateLatency(180 + Math.random() * 120);
 
   const dailyStats = generateDailyStats();

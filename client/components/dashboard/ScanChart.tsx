@@ -1,9 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ScanChart — 30-day area chart with Recharts
-// Shows authentic / suspicious / counterfeit scan volumes over time
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import {
   AreaChart,
@@ -98,8 +95,8 @@ export default function ScanChart({ data }: ScanChartProps) {
             tickLine={false}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Area type="monotone" dataKey="authentic"   stroke="#00ff41" fill="url(#gradAuth)" strokeWidth={1.5} dot={false} />
-          <Area type="monotone" dataKey="suspicious"  stroke="#ff6b00" fill="url(#gradSusp)" strokeWidth={1.5} dot={false} />
+          <Area type="monotone" dataKey="authentic" stroke="#00ff41" fill="url(#gradAuth)" strokeWidth={1.5} dot={false} />
+          <Area type="monotone" dataKey="suspicious" stroke="#ff6b00" fill="url(#gradSusp)" strokeWidth={1.5} dot={false} />
           <Area type="monotone" dataKey="counterfeit" stroke="#ff1a1a" fill="url(#gradCntf)" strokeWidth={1.5} dot={false} />
           <Legend content={() => null} />
         </AreaChart>

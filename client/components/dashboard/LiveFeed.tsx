@@ -1,8 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// LiveFeed — real-time SSE scan event stream
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import { useLiveFeed } from "../../hooks/useLiveFeed";
 import type { LiveScanEvent } from "../../types";

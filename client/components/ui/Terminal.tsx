@@ -1,6 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Terminal — monospace terminal-style readout box
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import styles from "./Terminal.module.css";
 
@@ -19,8 +17,8 @@ interface TerminalProps {
 const COLOR_MAP: Record<NonNullable<TerminalLine["color"]>, string> = {
   green: "var(--col-green)",
   amber: "var(--col-amber)",
-  red:   "var(--col-red)",
-  dim:   "var(--col-chrome-dim)",
+  red: "var(--col-red)",
+  dim: "var(--col-chrome-dim)",
   white: "var(--col-white)",
 };
 

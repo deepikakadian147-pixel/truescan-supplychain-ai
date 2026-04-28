@@ -1,8 +1,5 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MetricsBar — live KPI cards showing aggregate scan statistics
-// ─────────────────────────────────────────────────────────────────────────────
 
 import type { AnalyticsData } from "../../types";
 import styles from "./MetricsBar.module.css";
@@ -63,9 +60,9 @@ function buildCards(data: AnalyticsData): KPICard[] {
 }
 
 const ACCENT_STYLE: Record<KPICard["accent"], React.CSSProperties> = {
-  green:  { color: "var(--col-green)", borderTopColor: "var(--col-green)" },
-  amber:  { color: "var(--col-amber)", borderTopColor: "var(--col-amber)" },
-  red:    { color: "var(--col-red)",   borderTopColor: "var(--col-red)" },
+  green: { color: "var(--col-green)", borderTopColor: "var(--col-green)" },
+  amber: { color: "var(--col-amber)", borderTopColor: "var(--col-amber)" },
+  red: { color: "var(--col-red)", borderTopColor: "var(--col-red)" },
   chrome: { color: "var(--col-white)", borderTopColor: "var(--col-chrome-dim)" },
 };
 

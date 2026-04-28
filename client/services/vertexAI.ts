@@ -1,7 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Simulated Vertex AI MLOps Pipeline
-// Realistic latency, deterministic confidence by product code, feature extraction
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 import type {
   ScanStatus,
@@ -12,26 +9,26 @@ import { PRODUCT_DB } from "../lib/constants";
 
 const MODEL_VERSION = "truescan-v2.4.1-gemini-vision";
 
-// ── Simulated network + inference latency ───────────────────────────────────
+
 function simulateLatency(minMs: number, maxMs: number): Promise<void> {
   const ms = minMs + Math.random() * (maxMs - minMs);
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// ── Deterministic anomaly score keyed by product code ───────────────────────
+
 function computeAnomalyScore(code: string): number {
   if (!(code in PRODUCT_DB)) {
-    // Unknown codes get high anomaly
+
     return 0.72 + Math.random() * 0.28;
   }
-  // Known codes have very low anomaly — seeded by code hash
+
   let seed = 0;
   for (let i = 0; i < code.length; i++) seed += code.charCodeAt(i);
   const base = (seed % 100) / 1000; // 0.000–0.099
   return base + Math.random() * 0.04;
 }
 
-// ── Risk factor extraction ───────────────────────────────────────────────────
+
 function extractRiskFactors(
   code: string,
   anomalyScore: number
@@ -87,14 +84,14 @@ function extractRiskFactors(
   return factors;
 }
 
-// ── Status from anomaly score ─────────────────────────────────────────────────
+
 function deriveStatus(anomalyScore: number): ScanStatus {
   if (anomalyScore < 0.3) return "AUTHENTIC";
   if (anomalyScore < 0.65) return "SUSPICIOUS";
   return "COUNTERFEIT";
 }
 
-// ── Feature importance map (simulates SHAP values from Vertex AI Explainability)
+
 function buildFeatureImportance(anomalyScore: number): Record<string, number> {
   const base = anomalyScore;
   return {
@@ -106,7 +103,7 @@ function buildFeatureImportance(anomalyScore: number): Record<string, number> {
   };
 }
 
-// ── Public API ───────────────────────────────────────────────────────────────
+
 export interface VertexAIAnalysis {
   status: ScanStatus;
   confidence: number;
@@ -121,7 +118,7 @@ export async function analyzeProduct(
 ): Promise<VertexAIAnalysis> {
   const startMs = Date.now();
 
-  // Simulate Vision API pre-processing + model inference
+
   await simulateLatency(420, 1100);
 
   const anomalyScore = computeAnomalyScore(code);

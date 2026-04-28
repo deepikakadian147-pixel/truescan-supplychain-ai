@@ -130,7 +130,7 @@ npm run dev
 
 1. Open http://localhost:3000/scan
 2. Click **SCAN** next to any quick-pick code (e.g. `HUL·001`)
-3. Watch Gemini AI analyze and return a full result
+3. Watch Gemini AI analyze and return a full resul
 
 ---
 
