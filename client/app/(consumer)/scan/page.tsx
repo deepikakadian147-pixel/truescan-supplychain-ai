@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import NavBar from "../../../components/ui/NavBar";
-import CameraFeed from "../../../components/scanner/CameraFeed";
-import ScanOverlay from "../../../components/scanner/ScanOverlay";
-import ResultCard from "../../../components/scanner/ResultCard";
+const CameraFeed = dynamic(() => import("../../../components/scanner/CameraFeed"), { ssr: false });
+const ScanOverlay = dynamic(() => import("../../../components/scanner/ScanOverlay"), { ssr: false });
+const ResultCard  = dynamic(() => import("../../../components/scanner/ResultCard"),  { ssr: false });
 import { useScanner } from "../../../hooks/useScanner";
 import { scanProduct } from "../../../services/api";
 import type { ScanResult } from "../../../types";

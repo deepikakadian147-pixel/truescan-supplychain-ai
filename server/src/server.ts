@@ -13,9 +13,12 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 const app = express();
 app.use(cors({
   origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+    
     const isAllowed = 
       origin.startsWith("http://localhost") || 
+      origin.startsWith("http://127.0.0.1") || 
       origin.endsWith(".vercel.app") || 
       origin === process.env.FRONTEND_URL;
 
@@ -625,8 +628,7 @@ app.get("/api/events", (req: Request, res: Response): void => {
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
-    Connection: "keep-alive",
-    "Access-Control-Allow-Origin": "*",
+    Connection: "keep-alive"
   });
 
   res.write(": TrueScan SSE stream connected\n\n");
