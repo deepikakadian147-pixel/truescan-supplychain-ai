@@ -118,7 +118,7 @@ export function useScanner(): ScannerHookReturn {
         if (ctx) {
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           try {
-            const result = await reader.decodeFromCanvas(canvas);
+            const result = await (reader as any).decodeFromCanvas(canvas);
             if (result && active) {
               setDecodedCode(result.getText());
             }
