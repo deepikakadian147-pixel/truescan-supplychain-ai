@@ -33,6 +33,7 @@ const geminiModel = genAI.getGenerativeModel({
       properties: {
         status: {
           type: SchemaType.STRING,
+          format: "enum",
           enum: ["AUTHENTIC", "SUSPICIOUS", "COUNTERFEIT"],
           description: "Authenticity verdict",
         },
@@ -55,7 +56,7 @@ const geminiModel = genAI.getGenerativeModel({
             properties: {
               code:        { type: SchemaType.STRING },
               description: { type: SchemaType.STRING },
-              severity:    { type: SchemaType.STRING, enum: ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+              severity:    { type: SchemaType.STRING, format: "enum", enum: ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
               weight:      { type: SchemaType.NUMBER },
             },
             required: ["code", "description", "severity", "weight"],
@@ -532,7 +533,7 @@ app.post("/api/scan", async (req: Request, res: Response): Promise<void> => {
 
 // GET /api/product/:code
 app.get("/api/product/:code", (req: Request, res: Response): void => {
-  const code = (req.params.code ?? "").toUpperCase();
+  const code = String(req.params.code ?? "").toUpperCase();
   const p = PRODUCT_DB[code];
   if (!p) {
     res.status(404).json({ error: "Product not found", code: "NOT_FOUND", statusCode: 404 });
