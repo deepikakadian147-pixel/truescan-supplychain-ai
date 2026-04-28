@@ -35,7 +35,12 @@ export function useScanner(): ScannerHookReturn {
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+        video: {
+          facingMode: "environment",
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          advanced: [{ focusMode: "continuous" } as any],
+        },
       });
       streamRef.current = stream;
 
@@ -82,10 +87,22 @@ export function useScanner(): ScannerHookReturn {
 
     const initZXing = async () => {
       try {
-        const { BrowserMultiFormatReader } = await import("@zxing/library");
-        reader = new BrowserMultiFormatReader();
+        const { BrowserMultiFormatReader, BarcodeFormat, DecodeHintType } = await import("@zxing/library");
+        const hints = new Map();
+        // Enable common 1D and 2D barcode formats
+        hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+          BarcodeFormat.QR_CODE,
+          BarcodeFormat.DATA_MATRIX,
+          BarcodeFormat.EAN_13,
+          BarcodeFormat.EAN_8,
+          BarcodeFormat.CODE_128,
+          BarcodeFormat.CODE_39,
+          BarcodeFormat.UPC_A,
+          BarcodeFormat.UPC_E,
+        ]);
+        reader = new BrowserMultiFormatReader(hints);
       } catch {
-        // ZXing unavailable — graceful degradation, user can type code manually
+        // ZXing unavailable — graceful degradation
       }
     };
 

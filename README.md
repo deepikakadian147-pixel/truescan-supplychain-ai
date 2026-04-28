@@ -243,7 +243,16 @@ Cloud Run is perfect for the API as it scales to zero and handles SSE connection
    ```
 3. Note the deployed Cloud Run URL (e.g., `https://truescan-api-xxx.a.run.app`).
 
-### 2. Frontend (Next.js) → Vercel or Firebase Hosting
+### 2. Backend (Express API) → Render (Alternative)
+*Note: Using Gemini 2.0 Flash satisfies the Google Solution Challenge "Google technology" requirement. You do not strictly have to use GCP for hosting.*
+
+1. **Deploy to Render:**
+   - Link your GitHub repo to Render.
+   - The included `server/render.yaml` Blueprint will automatically configure the backend.
+   - Go to the Render dashboard -> New -> Blueprint -> Connect repo.
+   - Add your `GEMINI_API_KEY` in the Render environment variables settings.
+
+### 3. Frontend (Next.js) → Vercel
 Vercel offers the simplest zero-config Next.js deployment.
 
 1. Install the Vercel CLI: `npm i -g vercel`
@@ -252,10 +261,10 @@ Vercel offers the simplest zero-config Next.js deployment.
    cd client
    vercel
    ```
-3. **Update Next.js config:** In your Vercel dashboard (or `next.config.mjs` before deploying), update the API proxy to point to your new Cloud Run URL instead of `localhost`:
+3. **Update Next.js config:** In your Vercel dashboard (or `next.config.mjs` before deploying), update the API proxy to point to your new Cloud Run / Render URL instead of `localhost`:
    ```javascript
    // client/next.config.mjs
-   destination: "https://truescan-api-xxx.a.run.app/api/:path*"
+   destination: "https://truescan-api-xxx.onrender.com/api/:path*"
    ```
 
 ---
