@@ -1,7 +1,6 @@
 "use client";
 
-
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import NavBar from "../../../components/ui/NavBar";
 import CameraFeed from "../../../components/scanner/CameraFeed";
@@ -23,7 +22,7 @@ const PRODUCT_CODES = [
   "TS-ITC-008-2024",
 ];
 
-export default function ScanPage() {
+function ScanPageInner() {
   const searchParams = useSearchParams();
   const prefilledCode = searchParams.get("code") ?? "";
 
@@ -225,5 +224,13 @@ export default function ScanPage() {
         </div>
       </main>
     </>
+  );
+}
+
+export default function ScanPage() {
+  return (
+    <Suspense fallback={null}>
+      <ScanPageInner />
+    </Suspense>
   );
 }
