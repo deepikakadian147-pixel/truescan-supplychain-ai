@@ -1,7 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// TrueScan Shared Type Definitions
-// Source of truth shared between client and server
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 export type ScanStatus = "AUTHENTIC" | "SUSPICIOUS" | "COUNTERFEIT";
 
