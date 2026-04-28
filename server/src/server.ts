@@ -11,8 +11,28 @@ import { v4 as uuidv4 } from "uuid";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 
 const app = express();
-app.use(cors({ origin: ["http://localhost:3000", "https://*.vercel.app"], credentials: true }));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    const isAllowed = 
+      origin.startsWith("http://localhost") || 
+      origin.endsWith(".vercel.app") || 
+      origin === process.env.FRONTEND_URL;
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
 app.use(express.json({ limit: "10mb" }));
+
+app.get("/", (req, res) => {
+  res.json({ message: "TrueScan API is online", status: "ok" });
+});
 
 // ── Gemini client ────────────────────────────────────────────────────────────
 
