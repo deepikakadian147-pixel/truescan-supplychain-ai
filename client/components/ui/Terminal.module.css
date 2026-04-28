@@ -1,0 +1,54 @@
+/* Terminal.module.css */
+.terminal {
+  background: #040404;
+  border: 1px solid var(--col-border-lit);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--col-bg-3);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.dots {
+  display: flex;
+  gap: 5px;
+}
+
+.dotRed   { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+.dotAmber { width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; }
+.dotGreen { width: 10px; height: 10px; border-radius: 50%; background: #28c840; }
+
+.title {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--col-chrome-dim);
+}
+
+.body {
+  padding: var(--sp-4);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.line {
+  display: flex;
+  gap: var(--sp-2);
+  color: var(--col-chrome);
+  line-height: 1.7;
+}
+
+.prefix {
+  color: var(--col-green-dim);
+  user-select: none;
+  flex-shrink: 0;
+  min-width: 80px;
+}

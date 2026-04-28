@@ -1,215 +1,277 @@
-# TRUESCAN — AI-Powered Authenticity Layer for Smart Supply Chains
+# TrueScan — AI Supply Chain Authenticity Platform
 
-## 🚀 Overview
-
-TrueScan is a full-stack AI system that transforms a standard camera into a **real-time product authenticity verification engine**.
-
-It introduces a missing layer in modern supply chains:
-
-> **Trust.**
+> **Google Solution Challenge 2024** · Powered by Gemini 2.0 Flash · Vertex AI · BigQuery  
+> Addressing UN SDGs: **03 Good Health** · **12 Responsible Consumption** · **17 Partnerships**
 
 ---
 
-## 🌍 Problem
+## Problem Statement
 
-Smart supply chains optimize:
+India loses an estimated **₹1.1 lakh crore** (~$13B USD) annually to counterfeit FMCG products. Fake medicines, adulterated food, and counterfeit personal care products directly harm consumer health. Existing verification systems are manual, siloed, and inaccessible to end consumers at the point of purchase.
 
-* speed
-* cost
-* logistics
-
-But fail at:
-
-* product authenticity verification
-* counterfeit detection
-* real-time fraud intelligence
-
-### ⚠️ Result
-
-* Fake FMCG products enter markets
-* Consumers are exposed to unsafe goods
-* Companies lose revenue and trust
+**TrueScan** solves this by putting AI-powered product verification directly in consumers' hands — scan any product, get an authenticity verdict from Google Gemini AI in under 2 seconds.
 
 ---
 
-## 💡 Solution
+## Solution Overview
 
-TrueScan introduces an **AI-powered verification pipeline**:
+TrueScan is a full-stack web platform that:
+
+1. **Consumer scans** a product QR code / barcode using their phone camera
+2. **Gemini 2.0 Flash** performs multimodal analysis — code integrity + optional image analysis
+3. **Supply chain provenance** is retrieved from the blockchain-anchored registry
+4. **Risk factors** are surfaced with SHAP-style feature importance scores
+5. **Admin dashboard** shows real-time scan events, threat maps, and 30-day analytics via BigQuery
+
+---
+
+## Google Cloud Architecture
 
 ```
-Camera → Vision AI → Vertex AI → BigQuery → Decision Engine
+┌─────────────────────────────────────────────────────┐
+│                   CLIENT (Next.js)                  │
+│  ZXing QR Decoder → API call → Result display       │
+└────────────────────┬────────────────────────────────┘
+                     │ HTTPS
+┌────────────────────▼────────────────────────────────┐
+│              Cloud Run (Express API)                │
+│  POST /api/scan                                     │
+│    └─→ Gemini 2.0 Flash (multimodal analysis)       │
+│    └─→ Supply chain + risk factor builder           │
+│  GET  /api/analytics → BigQuery warehouse query     │
+│  GET  /api/events    → SSE live scan stream         │
+└────────────────────┬────────────────────────────────┘
+         ┌───────────┼──────────────┐
+         ▼           ▼              ▼
+   Vertex AI    BigQuery      Cloud Storage
+  (model reg)  (analytics)  (product images)
 ```
 
-It enables:
+### Google Services Used
 
-* real-time scanning
-* anomaly detection
-* authenticity scoring
-
----
-
-## 🧠 Architecture
-
-```
-Frontend (Next.js / React)
-        ↓
-Node.js Backend (Express API)
-        ↓
-Google Cloud Services
-   ├── Vision API (OCR)
-   ├── Vertex AI (ML inference)
-   └── BigQuery (fraud analytics)
-```
+| Service | Role |
+|---|---|
+| **Gemini 2.0 Flash** | Multimodal AI — analyzes product codes + images for authenticity |
+| **Vertex AI** | MLOps pipeline, model registry, Explainable AI (feature importance) |
+| **BigQuery** | Analytics warehouse — 30-day scan event aggregation & threat analysis |
+| **Cloud Run** | Serverless container deployment for the Express.js API server |
+| **Cloud Storage** | Product image store for visual analysis batch jobs |
+| **Firebase Firestore** | Real-time scan event sync for live SSE dashboard stream |
 
 ---
 
-## 🔍 Features
+## Features
 
-### 🎥 Camera-Based Scanning
+### 🔬 Consumer Scanner (`/scan`)
+- **Real Camera** — `getUserMedia` live video feed
+- **ZXing QR/Barcode** — automatic code detection from camera frames
+- **Manual input** — type or paste any product code with quick-pick buttons
+- **Gemini 2.0 Flash** — real AI API call analyzing code + optional image frame
+- **Full result card** — confidence meter, AI summary, supply chain timeline, risk factors, SHAP feature importance, blockchain hash
 
-* Uses WebRTC camera feed
-* Captures product frames
-* No external hardware required
+### 📊 Admin Dashboard (`/dashboard`)
+- **Live KPI bar** — total scans, authentic rate, suspicious count, counterfeit count, avg confidence
+- **30-day area chart** — authentic / suspicious / counterfeit breakdown (Recharts)
+- **Global threat map** — SVG world map with proportional risk circles per country
+- **Real-time live feed** — SSE stream of incoming scan events with connection indicator
+- **Risk category rankings** — top FMCG categories by counterfeit exposure
 
----
-
-### 🧠 AI Verification Engine
-
-* OCR-based label detection
-* Texture anomaly simulation
-* Confidence scoring system
-
----
-
-### 🌍 Fraud Detection (BigQuery Logic)
-
-* Detects geographic inconsistencies
-* Identifies suspicious scan patterns
-* Flags anomalies in real-time
+### 🏭 Supply Chain Provenance
+Every scan returns a 5-stage chain-of-custody:
+`MANUFACTURE → QUALITY_CHECK → DISTRIBUTION → RETAIL → CONSUMER_SCAN`  
+Each stage includes: location, actor, timestamp, blockchain hash
 
 ---
 
-### 📊 Admin Dashboard (Extendable)
+## Tech Stack
 
-* Scan analytics
-* Fraud visibility
-* System monitoring
-
----
-
-## 🧩 Tech Stack
-
-| Layer     | Technology                     |
-| --------- | ------------------------------ |
-| Frontend  | Next.js (React)                |
-| Backend   | Node.js (Express)              |
-| AI Layer  | Google Vision API (extendable) |
-| ML        | Vertex AI (simulated)          |
-| Analytics | BigQuery                       |
-| Language  | TypeScript                     |
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 15, TypeScript (strict), CSS Modules |
+| AI | **Google Gemini 2.0 Flash** (`@google/generative-ai`) |
+| QR Scanning | `@zxing/library` — BrowserMultiFormatReader |
+| Charts | Recharts |
+| Backend | Express.js, TypeScript, ts-node-dev |
+| Real-time | Server-Sent Events (SSE) |
+| Font | Geist Mono, DM Mono |
 
 ---
 
-## 📁 Project Structure
+## Quick Start
 
-```
-client/     → React UI
-server/     → Node.js backend
-shared/     → Types
+### Prerequisites
+- Node.js ≥ 18.x
+- npm ≥ 9.x
+
+### 1. Install dependencies
+
+```bash
+npm run install:all
 ```
 
----
+### 2. Set Gemini API key (already configured in `server/.env`)
 
-## ⚙️ Getting Started
-
-### 1. Clone Repository
-
-```
-git clone https://github.com/your-username/truescan-supplychain-ai.git
-cd truescan-supplychain-ai
+```bash
+# server/.env
+GEMINI_API_KEY=your_key_here
 ```
 
----
+### 3. Run both servers
 
-### 2. Run Backend
-
-```
-cd server
-npm install
+```bash
 npm run dev
 ```
 
+- **Client**: http://localhost:3000
+- **API Server**: http://localhost:5000
+- **Live Events**: http://localhost:5000/api/events
+
+### 4. Test the scanner
+
+1. Open http://localhost:3000/scan
+2. Click **SCAN** next to any quick-pick code (e.g. `HUL·001`)
+3. Watch Gemini AI analyze and return a full result
+
 ---
 
-### 3. Run Frontend
+## API Reference
+
+### `POST /api/scan`
+Analyze a product for authenticity using Gemini 2.0 Flash.
+
+**Request:**
+```json
+{
+  "code": "TS-HUL-001-2024",
+  "imageBase64": "optional_base64_jpeg"
+}
+```
+
+**Response:** Full `ScanResult` with status, confidence, supply chain, risk factors, Gemini metadata.
+
+### `GET /api/analytics`
+30-day aggregated BigQuery analytics.
+
+### `GET /api/events`
+Server-Sent Events stream. Events: `{ event: "scan", data: LiveScanEvent }` every 5–9 seconds.
+
+### `GET /api/product/:code`
+Product details from registry.
+
+---
+
+## Registered Test Products
+
+| Code | Product | Brand |
+|---|---|---|
+| `TS-HUL-001-2024` | Dove Beauty Bar 100g | HUL |
+| `TS-PEP-002-2024` | Lay's Classic Salted 52g | PepsiCo |
+| `TS-MRK-003-2024` | Dettol Liquid Soap 200ml | Reckitt |
+| `TS-COL-004-2024` | Colgate MaxFresh 150g | Colgate |
+| `TS-NES-005-2024` | Maggi 2-Minute Noodles 70g | Nestlé |
+| `TS-GSK-006-2024` | Horlicks Original 500g | GSK |
+| `TS-TSC-007-2024` | Tata Tea Premium 500g | Tata Consumer |
+| `TS-ITC-008-2024` | Classmate Notebook 200 Pages | ITC |
+
+**Any other code** → Gemini AI flags as SUSPICIOUS/COUNTERFEIT (not in registry).
+
+---
+
+## Project Structure
 
 ```
-cd client
-npm install
-npm run dev
+truescan-supplychain-ai/
+├── client/                   # Next.js 15 frontend
+│   ├── app/                  # App Router pages
+│   │   ├── page.tsx          # Landing page
+│   │   ├── (consumer)/scan/  # Scanner page
+│   │   └── (admin)/dashboard/# Analytics dashboard
+│   ├── components/
+│   │   ├── scanner/          # CameraFeed, ScanOverlay, ResultCard
+│   │   ├── dashboard/        # MetricsBar, ScanChart, ThreatMap, LiveFeed
+│   │   └── ui/               # NavBar, StatusBadge, Terminal
+│   ├── services/
+│   │   ├── api.ts            # Typed fetch layer
+│   │   ├── vertexAI.ts       # Simulated Vertex AI pipeline
+│   │   └── bigquery.ts       # Simulated BigQuery analytics
+│   └── hooks/
+│       ├── useScanner.ts     # Camera + ZXing hook
+│       └── useLiveFeed.ts    # SSE event stream hook
+├── server/
+│   └── src/server.ts         # Express API + real Gemini integration
+└── shared/
+    └── types.ts              # Shared TypeScript interfaces
 ```
 
 ---
 
-### 4. Open App
+## UN SDG Impact
 
-```
-http://localhost:3000
-```
-
----
-
-## 🧪 Prototype Capabilities
-
-* Scan product using camera
-* Run AI-based authenticity logic
-* Detect anomalies
-* Return structured result
+| SDG | How TrueScan Helps |
+|---|---|
+| **SDG 3** — Good Health & Well-Being | Prevents counterfeit medicines, health products, and food from reaching consumers |
+| **SDG 12** — Responsible Consumption | Creates transparency across FMCG supply chains; enables informed purchasing |
+| **SDG 17** — Partnerships for Goals | Shared verification infrastructure for brands, distributors, and regulators |
 
 ---
 
-## 📈 Impact
+## Deployment Guide (GCP & Vercel)
 
-### For Businesses
+To utilize your Google Cloud Platform credits and ensure high availability for the hackathon judges, deploy the services separately:
 
-* Reduce counterfeit penetration
-* Improve supply chain trust
-* Enable real-time verification
+### 1. Backend (Express API) → Google Cloud Run
+Cloud Run is perfect for the API as it scales to zero and handles SSE connections elegantly.
 
-### For Consumers
+1. **Create a `Dockerfile`** in the `server/` directory:
+   ```dockerfile
+   FROM node:18-alpine
+   WORKDIR /app
+   COPY package*.json ./
+   RUN npm install
+   COPY . .
+   RUN npm run build
+   EXPOSE 5001
+   CMD ["npm", "start"]
+   ```
+2. **Deploy via gcloud CLI:**
+   ```bash
+   cd server
+   gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/truescan-api
+   gcloud run deploy truescan-api --image gcr.io/YOUR_PROJECT_ID/truescan-api \
+     --platform managed --region asia-south1 --allow-unauthenticated \
+     --set-env-vars="GEMINI_API_KEY=your_key_here,PORT=5001"
+   ```
+3. Note the deployed Cloud Run URL (e.g., `https://truescan-api-xxx.a.run.app`).
 
-* Instant product authenticity check
-* Increased safety and trust
+### 2. Frontend (Next.js) → Vercel or Firebase Hosting
+Vercel offers the simplest zero-config Next.js deployment.
+
+1. Install the Vercel CLI: `npm i -g vercel`
+2. Run deployment from the `client/` directory:
+   ```bash
+   cd client
+   vercel
+   ```
+3. **Update Next.js config:** In your Vercel dashboard (or `next.config.mjs` before deploying), update the API proxy to point to your new Cloud Run URL instead of `localhost`:
+   ```javascript
+   // client/next.config.mjs
+   destination: "https://truescan-api-xxx.a.run.app/api/:path*"
+   ```
 
 ---
 
-## 🔮 Future Scope
+## Design Philosophy
 
-* Real Vertex AI deployment
-* Google Maps fraud heatmap
-* Blockchain-based product identity
-* Real-time alert system
-* ERP / SAP integration
+TrueScan deliberately avoids generic "AI startup" aesthetics. The UI uses:
+- **Geist Mono** typeface — industrial, precision-grade
+- **Toxic green (#00FF41)** on deep gunmetal — high-contrast, zero ambiguity
+- Brutalist hard borders, no soft shadows, no rounded cards
+- Scanline animations, terminal readouts, corner-bracket targeting UI
 
----
-
-## 🧠 Engineering Philosophy
-
-* Treat camera as a **sensor**
-* Replace static checks with **AI-driven decisions**
-* Design for **scale + observability**
-* Build systems, not just apps
+The visual language reflects the industrial supply chain domain — not a consumer wellness app.
 
 ---
 
-## 🏁 Conclusion
+## License
 
-TrueScan is not just a scanner.
-
-> It is a **distributed authenticity infrastructure for the future of smart supply chains**.
-
----
-
-## 📄 License
-
-MIT
+MIT © 2024 TrueScan

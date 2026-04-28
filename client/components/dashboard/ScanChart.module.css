@@ -1,0 +1,62 @@
+/* ScanChart.module.css */
+.wrapper {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border);
+  padding: var(--sp-5);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--sp-5);
+}
+
+.title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--col-white);
+}
+
+.sub {
+  font-size: 0.6rem;
+  color: var(--col-chrome-dim);
+  margin-top: 3px;
+  letter-spacing: 0.06em;
+}
+
+.legend {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+}
+
+.legendItem {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.tooltip {
+  background: var(--col-bg-2);
+  border: 1px solid var(--col-border-lit);
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.tooltipDate {
+  color: var(--col-chrome-dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--sp-2);
+}
+
+.tooltipRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  font-size: 0.65rem;
+  margin-bottom: 2px;
+}

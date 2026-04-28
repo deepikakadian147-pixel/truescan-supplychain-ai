@@ -1,0 +1,289 @@
+/* ResultCard.module.css */
+.card {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border-lit);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--col-green);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--sp-6);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.headerLeft { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.productName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--col-white);
+  letter-spacing: -0.01em;
+}
+
+.confidenceBlock {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.confidenceValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.pct {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.confidenceLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--col-chrome-dim);
+  margin-top: 4px;
+}
+
+/* ── AI Summary ── */
+.aiSummary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-6);
+  background: var(--col-green-ghost);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.aiTag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--col-green-dim);
+}
+
+.summaryText {
+  font-size: 0.875rem;
+  color: var(--col-chrome);
+  font-style: italic;
+}
+
+/* ── Bars ── */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.barLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--col-chrome-dim);
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.barTrack {
+  flex: 1;
+  height: 4px;
+  background: var(--col-bg-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  transition: width 0.8s var(--ease);
+}
+
+.barValue {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--col-chrome);
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Sections ── */
+.section {
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.sectionTitle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--col-chrome-dim);
+  margin-bottom: var(--sp-4);
+}
+
+/* ── Risk factors ── */
+.riskList { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+.riskItem {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  gap: var(--sp-3);
+  align-items: center;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 3px solid;
+  font-size: 0.75rem;
+}
+
+.riskCritical { border-color: var(--col-red); background: rgba(255,26,26,0.04); }
+.riskHigh     { border-color: var(--col-amber); background: rgba(255,107,0,0.04); }
+.riskMedium   { border-color: #ffcc00; background: rgba(255,204,0,0.04); }
+.riskLow      { border-color: var(--col-green-dim); background: var(--col-green-ghost); }
+
+.riskCode { font-weight: 700; color: var(--col-white); font-size: 0.65rem; letter-spacing: 0.08em; }
+.riskDesc { color: var(--col-chrome-dim); }
+.riskSev  { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-align: right; }
+
+/* ── Timeline ── */
+.timeline { display: flex; flex-direction: column; }
+
+.timelineItem {
+  display: flex;
+  gap: var(--sp-4);
+}
+
+.timelineLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.timelineDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.dotVerified   { border-color: var(--col-green); background: rgba(0,255,65,0.2); }
+.dotUnverified { border-color: var(--col-red); background: rgba(255,26,26,0.2); }
+
+.timelineConnector {
+  width: 1px;
+  flex: 1;
+  background: var(--col-border);
+  min-height: 24px;
+  margin: 3px 0;
+}
+
+.timelineContent {
+  padding-bottom: var(--sp-4);
+  min-width: 0;
+}
+
+.timelineStage {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--col-green);
+}
+
+.timelineActor {
+  font-size: 0.8rem;
+  color: var(--col-white);
+  margin-top: 2px;
+}
+
+.timelineLoc {
+  font-size: 0.7rem;
+  color: var(--col-chrome-dim);
+}
+
+.timelineHash {
+  font-size: 0.6rem;
+  color: var(--col-border-lit);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+/* ── Feature importance ── */
+.features { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.featureRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.featureKey {
+  font-size: 0.65rem;
+  color: var(--col-chrome-dim);
+  width: 200px;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+
+.featureBarTrack {
+  flex: 1;
+  height: 3px;
+  background: var(--col-bg-3);
+  overflow: hidden;
+}
+
+.featureBarFill {
+  height: 100%;
+  background: var(--col-green-dim);
+  transition: width 0.6s var(--ease);
+}
+
+.featureVal {
+  font-size: 0.65rem;
+  color: var(--col-chrome-dim);
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Blockchain ── */
+.blockchainRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-6);
+  background: var(--col-bg-2);
+}
+
+.blockchainLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--col-chrome-dim);
+  flex-shrink: 0;
+}
+
+.blockchainHash {
+  font-size: 0.65rem;
+  color: var(--col-green-dim);
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}

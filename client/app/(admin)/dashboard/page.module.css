@@ -1,0 +1,152 @@
+/* Dashboard page.module.css */
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pageTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--col-white);
+  margin-bottom: var(--sp-2);
+}
+
+.pageSub {
+  font-size: 0.6rem;
+  color: var(--col-chrome-dim);
+  letter-spacing: 0.06em;
+}
+
+.bqJob {
+  color: var(--col-green-dim);
+}
+
+.headerRight {
+  flex-shrink: 0;
+}
+
+.errorBanner {
+  background: rgba(255, 26, 26, 0.08);
+  border: 1px solid var(--col-red);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: 0.75rem;
+  color: var(--col-red);
+}
+
+.errorBanner code {
+  color: var(--col-chrome);
+}
+
+.skeleton {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+}
+
+/* ── Risk categories ── */
+.riskSection {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border);
+  padding: var(--sp-5);
+}
+
+.riskTitle {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--col-white);
+  margin-bottom: var(--sp-5);
+}
+
+.riskBars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.riskBar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  font-size: 0.72rem;
+}
+
+.riskRank {
+  color: var(--col-chrome-dim);
+  width: 24px;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+}
+
+.riskCat {
+  color: var(--col-chrome);
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.riskTrack {
+  flex: 1;
+  height: 4px;
+  background: var(--col-bg-3);
+  overflow: hidden;
+}
+
+.riskFill {
+  height: 100%;
+  background: var(--col-amber);
+  transition: width 0.8s var(--ease);
+}
+
+.riskCount {
+  width: 40px;
+  text-align: right;
+  color: var(--col-amber);
+  font-weight: 700;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+/* ── Footer note ── */
+.footerNote {
+  font-size: 0.6rem;
+  color: var(--col-border-lit);
+  letter-spacing: 0.08em;
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--col-border);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .grid2 { grid-template-columns: 1fr; }
+}

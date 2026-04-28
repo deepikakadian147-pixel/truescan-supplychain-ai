@@ -1,0 +1,16 @@
+{
+  "name": "truescan-supplychain-ai",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --names \"SERVER,CLIENT\" --prefix-colors \"yellow,cyan\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "install:all": "npm install && npm --prefix client install && npm --prefix server install",
+    "build": "npm --prefix client run build",
+    "typecheck": "npm --prefix client run typecheck && npm --prefix server run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

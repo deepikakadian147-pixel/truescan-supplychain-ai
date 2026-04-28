@@ -1,0 +1,148 @@
+/* ScanOverlay.module.css */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* ── Corner brackets ── */
+.corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--col-green);
+  border-style: solid;
+}
+.cornerTL { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+.cornerTR { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
+.cornerBL { bottom: 40px; left: 16px; border-width: 0 0 2px 2px; }
+.cornerBR { bottom: 40px; right: 16px; border-width: 0 2px 2px 0; }
+
+/* ── Scanline ── */
+.scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--col-green) 20%,
+    rgba(0, 255, 65, 0.9) 50%,
+    var(--col-green) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px 2px rgba(0, 255, 65, 0.5);
+  animation: scanline 2.4s linear infinite;
+  top: 0;
+}
+
+/* ── Processing ring ── */
+.processingRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ring {
+  width: 56px;
+  height: 56px;
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  border-top-color: var(--col-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.processingLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--col-green);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+  animation: blink 1.2s step-end infinite;
+}
+
+/* ── Decoded code readout ── */
+.codeReadout {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--col-green);
+  padding: 4px 12px;
+}
+
+.codeLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--col-green-dim);
+}
+
+.codeValue {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--col-green);
+  letter-spacing: 0.05em;
+}
+
+/* ── Status bar ── */
+.statusBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid var(--col-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotActive {
+  background: var(--col-green);
+  animation: pulse-ring 1.5s infinite;
+}
+
+.dotIdle {
+  background: var(--col-chrome-dim);
+}
+
+.statusText {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--col-chrome);
+  flex: 1;
+}
+
+.modelTag {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--col-green-dim);
+  border: 1px solid var(--col-border);
+  padding: 1px 6px;
+}

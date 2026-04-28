@@ -1,0 +1,67 @@
+/* ThreatMap.module.css */
+.wrapper {
+  background: var(--col-surface);
+  border: 1px solid var(--col-border);
+  padding: var(--sp-5);
+}
+
+.header {
+  margin-bottom: var(--sp-4);
+}
+
+.title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--col-white);
+}
+
+.sub {
+  font-size: 0.6rem;
+  color: var(--col-chrome-dim);
+  margin-top: 3px;
+}
+
+.mapContainer {
+  width: 100%;
+  border: 1px solid var(--col-border);
+  overflow: hidden;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pulseCircle {
+  animation: threatPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes threatPulse {
+  0%, 100% { opacity: 0.4; r: attr(r); }
+  50%       { opacity: 0.8; }
+}
+
+.legend {
+  display: flex;
+  gap: var(--sp-6);
+  margin-top: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--col-chrome-dim);
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}

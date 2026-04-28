@@ -1,0 +1,103 @@
+/* NavBar.module.css */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7, 7, 7, 0.95);
+  border-bottom: 1px solid var(--col-border);
+  backdrop-filter: blur(8px);
+}
+
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.wordmarkPrimary {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--col-white);
+  letter-spacing: -0.03em;
+}
+
+.wordmarkAccent {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--col-green);
+  letter-spacing: -0.03em;
+}
+
+.wordmarkTag {
+  font-size: 0.6rem;
+  color: var(--col-chrome-dim);
+  margin-left: var(--sp-2);
+  letter-spacing: 0.05em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--col-chrome-dim);
+  text-decoration: none;
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.navLink:hover {
+  color: var(--col-white);
+  text-decoration: none;
+}
+
+.active {
+  color: var(--col-green);
+  border-color: var(--col-border);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background: var(--col-green);
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+}
+
+.statusText {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--col-green);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .status { display: none; }
+  .navLink { padding: var(--sp-2); }
+}
