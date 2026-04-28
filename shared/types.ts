@@ -1,9 +1,9 @@
-export type ScanStatus = 'AUTHENTIC' | 'SUSPICIOUS' | 'COUNTERFEIT';
-
-export interface ScanResult {
-  scanId: string;
-  timestamp: string;
-  status: ScanStatus;
-  confidence: number;
-  anomalyFlags: string[];
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body style={{ background: "#050505", color: "#fff" }}>
+        {children}
+      </body>
+    </html>
+  );
 }
